@@ -43,7 +43,7 @@ const initialState = {};
 const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
-const font = "'Lato', sans-serif"; 
+const font = "'Lato', sans-serif";
 // const theme = createMuiTheme({
 //     palette: {
 //        type: "dark"
@@ -51,33 +51,30 @@ const font = "'Lato', sans-serif";
 // });
 
 const theme = createMuiTheme({
-    palette: {
-        primary: {
-            main: '#0b5994',
-        },
-        secondary: {
-            main: '#1d83c6',
-        },
+  palette: {
+    primary: {
+      main: '#0b5994',
     },
+    secondary: {
+      main: '#1d83c6',
+    },
+  },
 });
-const render = (messages) => {
+const render = messages => {
   ReactDOM.render(
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
       <Provider store={store}>
         <LanguageProvider messages={messages}>
           <ConnectedRouter history={history}>
-        
-          <App />
-          
-        </ConnectedRouter>
+            <App />
+          </ConnectedRouter>
         </LanguageProvider>
       </Provider>
     </MuiThemeProvider>,
-    document.getElementById('app')
+    document.getElementById('app'),
   );
 };
-
 
 if (module.hot) {
   // Hot reloadable React components and translation json files
