@@ -14,7 +14,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import createHistory from 'history/createBrowserHistory';
-import 'sanitize.css/sanitize.css';
+// import 'sanitize.css/sanitize.css';
 
 // Import root app
 import App from 'containers/App';
@@ -34,26 +34,50 @@ import configureStore from './configureStore';
 import { translationMessages } from './i18n';
 
 // Import CSS reset and Global Styles
-import './global-styles';
+// import 'typeface-roboto'
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 // Create redux store with history
 const initialState = {};
 const history = createHistory();
 const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
+const font = "'Lato', sans-serif"; 
+// const theme = createMuiTheme({
+//     palette: {
+//        type: "dark"
+//     }
+// });
 
-const render = messages => {
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#0b5994',
+        },
+        secondary: {
+            main: '#1d83c6',
+        },
+    },
+});
+const render = (messages) => {
   ReactDOM.render(
-    <Provider store={store}>
-      <LanguageProvider messages={messages}>
-        <ConnectedRouter history={history}>
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <Provider store={store}>
+        <LanguageProvider messages={messages}>
+          <ConnectedRouter history={history}>
+        
           <App />
+          
         </ConnectedRouter>
-      </LanguageProvider>
-    </Provider>,
-    MOUNT_NODE,
+        </LanguageProvider>
+      </Provider>
+    </MuiThemeProvider>,
+    document.getElementById('app')
   );
 };
+
 
 if (module.hot) {
   // Hot reloadable React components and translation json files
